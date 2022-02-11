@@ -28,7 +28,7 @@ bool getpathdfs ( int ** graph , int v , bool* visited , int source , int desti 
 }
 int main()
 {
-    int V, E, tempX, tempY;
+    int V, E;
     cout<<"enetr vertex and edges"<<endl;
     cin >> V >> E;
 
