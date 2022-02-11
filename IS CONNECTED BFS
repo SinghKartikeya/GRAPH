@@ -1,0 +1,77 @@
+# GRAPH
+
+#include<vector>
+#include<iostream>
+#include<queue>
+using namespace std;
+void printbfs(int n,int** edges,int sv,bool* visited,queue<int> qt)
+{
+    qt.push(sv);
+    visited[sv]=true;
+    while(!qt.empty())
+    {
+        int current=qt.front();
+        qt.pop();
+
+    for(int i=0;i<n;i++)
+    {
+        if(i==current)
+        {
+            continue;
+        }
+        if(edges[current][i]==1 && visited[i]!=true)
+        {
+            qt.push(i);
+            visited[i]=true;
+        }
+    }
+}
+}
+int main()
+{
+    int n,t;
+    int x,y;
+    cout<<"enter no of vertices"<<endl;
+    cin>>n;
+    int** edge= new int*[n];
+    cout<<"enter no of edges"<<endl;
+    cin>>t;
+    cout<<"enter the edges"<<endl;
+    for(int i=0;i<n;i++)
+    {
+        edge[i]=new int[n];
+        for(int j=0;j<n;j++)
+        {
+            edge[i][j]=0;
+        }
+    }
+    for(int i=0;i<t;i++)
+    {
+        cin>>x>>y;
+        edge[x][y]=1;
+        edge[y][x]=1;
+    }
+    int sv=0;
+    
+    bool* visited=new bool[n];
+    for(int i=0;i<n;i++)
+    {
+        visited[i]=false;
+    }
+    queue<int> qt;
+    
+    printbfs(n,edge,sv,visited,qt);
+
+
+    int i=0;
+   for(i =0 ; i<n ;i++)
+   {    
+       if( !visited[i])
+       {
+           cout<<"not connected"<<endl;
+            break;
+       }
+    }
+    if(i==n)
+        cout<< "connected"<<endl;
+}
