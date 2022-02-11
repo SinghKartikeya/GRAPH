@@ -1,0 +1,79 @@
+# GRAPH
+#include <iostream>
+#include<vector>
+using namespace std;
+
+bool getpathdfs ( int ** graph , int v , bool* visited , int source , int desti , vector<int> & path)
+{
+    if( source==desti)
+    { path.push_back(source);
+       return true;
+    }
+    
+
+   if(graph[source][desti]==1) 
+    { path.push_back(desti);
+     path.push_back(source);
+     return true;
+    }
+    
+    
+    visited[source]=true;
+
+    bool ans =false;
+
+    for(int i=0 ;i<v ;i++)
+    {		
+        if(!visited[i] && graph[source][i]==1)
+            ans=getpathdfs(graph,v,visited,i,desti,path);
+        if( ans== true)
+        {
+            path.push_back(source);
+            return true;
+        }
+
+    }
+
+    return ans;
+}
+
+
+int main()
+{
+    int V, E, tempX, tempY;
+    cout<<"enetr vertex and edges"<<endl;
+    cin >> V >> E;
+
+    int** graph = new int * [V];
+
+    for(int i=0 ;i <V ;i++)
+    {
+        graph[i]=new int[V];
+        for( int j=0 ;j<V ;j++)
+            graph[i][j]=0; 
+    }
+cout<<"enter the edges"<<endl;
+    for(int i=0 ;i< E ;i++)
+    {
+        int x,y; 
+        cin>>x>>y;
+        graph[x][y]=1;
+        graph[y][x]=1;
+    }
+    bool * visited=new bool[V];
+    for(int i=0 ;i< V;i++)
+        visited[V]= false;
+
+    int source , desti ;
+    cout<<"enter source and destination"<<endl;
+    cin>> source>> desti;
+
+    vector <int> path;
+
+    if(getpathdfs( graph , V , visited , source, desti, path ))
+        for(int j=path.size()-1;j>-1;j-- )
+            cout<< path[j] <<" ";
+
+
+    return 0;
+}
