@@ -1,0 +1,76 @@
+# GRAPH
+
+#include<vector>
+#include<iostream>
+using namespace std;
+
+void findpath(int n,int** edges,int source,int destination,bool* visited,int flag)
+{
+    visited[source]=true;
+    for(int i=source;i<n;i++)
+    {
+
+        if(i==source)
+            continue;
+        if(edges[source][i]==1)
+        {
+            if(i==destination)
+            {
+                cout<<"path exist";
+                flag++;
+                break;
+
+            }
+            
+            if(visited[i]==true)
+            {
+                continue;
+            }
+            findpath(n,edges,i,destination,visited,flag);
+        }
+
+    }
+    
+}
+
+int main()
+{
+    int n,t;
+    int x,y,flag=0;
+    cout<<"enter no of vertices"<<endl;
+    cin>>n;
+    int** edge= new int*[n];
+    cout<<"enter no of edges"<<endl;
+    cin>>t;
+    cout<<"enter the edges"<<endl;
+    for(int i=0;i<n;i++)
+    {
+        edge[i]=new int[n];
+        for(int j=0;j<n;j++)
+        {
+            edge[i][j]=0;
+        }
+    }
+    for(int i=0;i<t;i++)
+    {
+        cin>>x>>y;
+        edge[x][y]=1;
+        edge[y][x]=1;
+    }
+    int sv=0;
+    
+    bool* visited=new bool[n];
+    for(int i=0;i<n;i++)
+    {
+        visited[i]=false;
+    }
+    int source,destination;
+    
+
+    cout<<"to find path"<<endl;
+    cout<<"enter source"<<endl;
+    cin>>source;
+    cout<<"enter destination"<<endl;
+    cin>>destination;
+    findpath(n,edge,source,destination,visited,flag);
+}
