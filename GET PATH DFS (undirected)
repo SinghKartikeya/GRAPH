@@ -9,15 +9,6 @@ bool getpathdfs ( int ** graph , int v , bool* visited , int source , int desti 
     { path.push_back(source);
        return true;
     }
-    
-
-   if(graph[source][desti]==1) 
-    { path.push_back(desti);
-     path.push_back(source);
-     return true;
-    }
-    
-    
     visited[source]=true;
 
     bool ans =false;
@@ -31,13 +22,10 @@ bool getpathdfs ( int ** graph , int v , bool* visited , int source , int desti 
             path.push_back(source);
             return true;
         }
-
     }
 
     return ans;
 }
-
-
 int main()
 {
     int V, E, tempX, tempY;
@@ -67,13 +55,10 @@ cout<<"enter the edges"<<endl;
     int source , desti ;
     cout<<"enter source and destination"<<endl;
     cin>> source>> desti;
-
     vector <int> path;
 
     if(getpathdfs( graph , V , visited , source, desti, path ))
         for(int j=path.size()-1;j>-1;j-- )
             cout<< path[j] <<" ";
-
-
     return 0;
 }
